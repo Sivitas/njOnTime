@@ -1,15 +1,27 @@
-<div ng-repeat="data in departingTrains">
-	<div class="row departures-title">
-		<div class="col-md-6">
-			<h5>{{ data.departureTime }}</h5>
-		</div>
-		<div class="col-md-6 text-right">
-			<h6>{{ data.remainingTime }} calculate this</h6>
-		</div>
+<div class="row">
+	<div class="col-md-3">
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-			
+	<div class="col-md-9">
+		<div ng-repeat="data in departureScope.departingTrains">
+			<div class="row departures-title">
+				<div class="col-md-6">
+					<h5 class="inline-block" ng-class="{ 'text-red': data.estimatedDepartureTime != data.departureTime }">{{ data.estimatedDepartureTime | timeFromServer }}</h5>
+					<p class="inline-block" ng-show="data.estimatedDepartureTime != data.departureTime">(scheduled for {{ data.departureTime | timeFromServer }})</p>
+				</div>
+				<div class="col-md-6 text-right">
+					<h6>{{ data.remainingTime }} calculate this</h6>
+				</div>
+			</div>
+			<div class="row margin-bottom-m">
+				<div class="col-md-6">
+					<p class="text-xl"><b>{{ data.destination }}</b></p>
+					<p class="subtext inline-block">{{ data.train }}</p>
+					<p class="subtext inline-block" ng-class="data.lineCode">{{ data.line }} <i class="fa fa-wrench"></i></p>
+				</div>
+				<div class="col-md-6 relative text-right">
+					<div class="track-box" ng-show="data.track">{{ data.track }}</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
