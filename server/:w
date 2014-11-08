@@ -1,0 +1,25 @@
+from bs4 import BeautifulSoup
+import requests
+
+
+station_list = ["MP"]
+
+for station in station_list:
+    page = requests.get("http://dv.njtransit.com/mobile/tid-mobile.aspx?sid=" + station).text
+    soup = BeautifulSoup(page)
+
+    all_rows = soup.find_all("tr")[2:]
+
+    departure_list = []
+
+    for row in all_rows:
+        info_dict = {}
+        all_columns = row.find_all("td")
+
+        for i in range(len(all_columns)):
+            info_dict["row"+str(i)] = all_columns[i].text.strip()
+
+        departure_list.append(info_dict)
+
+    for train in departure_list:
+        print train

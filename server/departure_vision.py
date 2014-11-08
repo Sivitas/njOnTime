@@ -38,6 +38,9 @@ def get_train_schedule():
             if info_dict["line"] in line_dict:
                 info_dict["line"] = line_dict[info_dict["line"]]
 
+            encoded_str = info_dict["destination"].encode("ascii", "ignore")
+            info_dict["destination"] = encoded_str
+
             if "A" not in info_dict["train"]:
                 departure_list.append(info_dict)
 
