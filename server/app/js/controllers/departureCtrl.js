@@ -1,6 +1,11 @@
 njOnTime.controller('departureCtrl', ['$scope', 'Const',
 function($scope, Const) {
 	var departureScope = $scope.departureScope = {};
+	$http({ method: 'GET', url: 'train_data.json', responseType: 'json' })
+	// $http({ method: 'GET', url: 'train_data.json', data: angular.toJson(httpData), responseType: 'json', timeout: canceller })
+						.success(function(data) {
+							console.log('here', data);
+						});
 
 	departureScope.departingTrains = [
 		{
