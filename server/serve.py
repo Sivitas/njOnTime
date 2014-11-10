@@ -5,10 +5,9 @@ from pyramid.view import view_config, view_defaults
 from pyramid.renderers import render
 from pyramid.static import static_view
 import sys, os
-import departure_vision
-import json
+from toolbox import departure_vision
 
-
+#@view_config(renderer="", request_method="GET", route_name="")
 def index_view(request):
     index_html = open("./app/index.html", "rU")
     data = index_html.read()
@@ -19,7 +18,6 @@ def get_train_data(self):
     return departure_vision.get_train_schedule()
 
 def main():
-    # add the index.html file
     config = Configurator()
     config.add_route('index', '/')
     config.add_route('train_data.json', 'train_data.json')

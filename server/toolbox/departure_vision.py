@@ -46,4 +46,3 @@ def get_train_schedule():
 
     return departure_list
 
-# git test
