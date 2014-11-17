@@ -7,15 +7,16 @@ from pyramid.static import static_view
 import sys, os
 from toolbox import departure_vision
 
-#@view_config(renderer="", request_method="GET", route_name="")
+
 def index_view(request):
     index_html = open("./app/index.html", "rU")
     data = index_html.read()
     return Response(data, content_type='text/html')
 
 @view_config(renderer="json", request_method="GET", route_name="train_data.json")
-def get_train_data(self):
-    return departure_vision.get_train_schedule()
+def get_train_data(self, station):
+    station = "MP"
+    return departure_vision.get_train_schedule(station)
 
 def main():
     config = Configurator()
